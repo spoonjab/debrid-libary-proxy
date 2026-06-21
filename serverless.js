@@ -63,7 +63,8 @@ router.get('/resolve/:debridProvider/:debridApiKey/:id/:hostUrl', (req, res) => 
     StreamProvider.resolveUrl(req.params.debridProvider, req.params.debridApiKey, req.params.id, decode(req.params.hostUrl), clientIp)
         .then(url => {
             if (mediaFlowUrl) {
-                const proxied = mediaFlowUrl.replace(/\/$/, '') + '/proxy/stream?url=' + encodeURIComponent(url) + (mediaFlowPassword ? '&api_password=' + encodeURIComponent(mediaFlowPassword) : '')
+                const filename = url.split('/').pop().split('?')[0]
+                const proxied = mediaFlowUrl.replace(/\/$/, '') + '/proxy/stream?d=' + encodeURIComponent(url) + (mediaFlowPassword ? '&api_password=' + encodeURIComponent(mediaFlowPassword) : '') + '&filename=' + encodeURIComponent(filename)
                 res.redirect(proxied)
             } else {
                 res.redirect(url)

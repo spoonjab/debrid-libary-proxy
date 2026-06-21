@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E \"\\\\.\\(js|json|md|txt|yaml|yml\\)$\")"
+      "Bash(grep -E \"\\\\.\\(js|json|md|txt|yaml|yml\\)$\")",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:mhdzumair.github.io)",
+      "WebFetch(domain:api.github.com)"
     ]
   }
 }
