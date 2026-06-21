@@ -56,9 +56,12 @@ router.get(`/:configuration?/:resource/:type/:id/:extra?.json`, (req, res, next)
 })
 
 router.get('/resolve/:debridProvider/:debridApiKey/:id/:hostUrl', (req, res) => {
-    const clientIp = requestIp.getClientIp(req)
     const mediaFlowUrl = req.query.mfUrl ? decode(req.query.mfUrl) : null
     const mediaFlowPassword = req.query.mfPass ? decode(req.query.mfPass) : null
+    // When MediaFlow is proxying the stream, it fetches the content server-side.
+    // Don't forward the client IP to Real-Debrid, or the download link will be
+    // locked to the client IP and MediaFlow's server won't be able to fetch it.
+    const clientIp = mediaFlowUrl ? null : requestIp.getClientIp(req)
 
     StreamProvider.resolveUrl(req.params.debridProvider, req.params.debridApiKey, req.params.id, decode(req.params.hostUrl), clientIp)
         .then(url => {

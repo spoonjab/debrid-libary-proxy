@@ -5,7 +5,9 @@
       "WebSearch",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:mhdzumair.github.io)",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/mhdzumair/mediaflow-proxy/main/docs/usage/url-params-and-encoding.md\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/mhdzumair/mediaflow-proxy/main/docs/usage/examples.md\")"
     ]
   }
 }
