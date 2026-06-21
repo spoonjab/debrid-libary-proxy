@@ -1,7 +1,7 @@
 {
-	"name": "debrid-search",
-	"version": "0.1.11",
-	"description": "Stremio Addon to search downloads and torrents in your Debrid cloud",
+	"name": "debrid-library-proxy",
+	"version": "1.0.0",
+	"description": "Stremio Addon that streams media from your Debrid library, routed through a MediaFlow proxy so your IP stays private",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",

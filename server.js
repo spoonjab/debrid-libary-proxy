@@ -8,10 +8,15 @@ import requestIp from 'request-ip'
 import rateLimit from 'express-rate-limit'
 import swStats from 'swagger-stats'
 import addonInterface from "./addon.js"
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const app = express()
 app.enable('trust proxy')
 app.use(cors())
+app.use('/public', express.static(join(__dirname, 'public')))
 
 app.use(swStats.getMiddleware({
     name: addonInterface.manifest.name,
