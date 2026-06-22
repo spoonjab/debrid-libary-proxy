@@ -49,7 +49,6 @@ Then visit `http://localhost:55771/configure` to generate your manifest URL.
 
 | Variable | Description |
 |---|---|
-| `ADDON_URL` | Public URL of this addon (e.g. `https://yourdomain.com`) |
 | `PORT` | Port to listen on (default: `55771`) |
 | `SWAGGER_USER` | Username for the swagger-stats dashboard |
 | `SWAGGER_PASSWORD` | Password for the swagger-stats dashboard |

@@ -32,6 +32,7 @@ router.get('/:configuration?/manifest.json', (req, res) => {
 router.get(`/:configuration?/:resource/:type/:id/:extra?.json`, (req, res, next) => {
     const { resource, type, id } = req.params
     const config = parseConfiguration(req.params.configuration)
+    config.addonUrl = `${req.protocol}://${req.get('host')}`
     const extra = req.params.extra ? qs.parse(req.url.split('/').pop().slice(0, -5)) : {}
 
     addonInterface.get(resource, type, id, extra, config)
