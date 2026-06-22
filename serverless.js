@@ -19,6 +19,7 @@ router.get('/:configuration?/configure', (req, res) => {
     const config = parseConfiguration(req.params.configuration)
     const landingHTML = landingTemplate(addonInterface.manifest, config)
     res.setHeader('content-type', 'text/html')
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet')
     res.end(landingHTML)
 })
 
