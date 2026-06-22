@@ -1,21 +1,77 @@
-## Debrid Search Stremio Addon
-Stremio Addon to search downloads and torrents in your Debrid cloud
+# Debrid Library Proxy — Stremio Addon
 
-Install - https://68d69db7dc40-debrid-search.baby-beamup.club/configure
+A Stremio addon that surfaces your Debrid cloud library as streamable links, routed through a [MediaFlow proxy](https://github.com/mhdzumair/mediaflow-proxy) so your real IP is never exposed to Debrid services.
 
+Forked from [MrMonkey42/stremio-addon-debrid-search](https://github.com/MrMonkey42/stremio-addon-debrid-search).
+
+---
+
+## What it does
+
+- Searches the **downloads and torrents already in your Debrid account** and presents them as stream links in Stremio
+- Routes all streams through your own **MediaFlow proxy** so Debrid services only see your server's IP
+- Works best alongside **[Debrid Media Manager](https://debridmediamanager.com)** — use DMM to manually find and cache torrents into your Debrid library, then this addon makes them instantly available in Stremio
+
+It does **not** search Debrid services for content not already in your account. Think of it as a bridge between your curated Debrid library and Stremio.
+
+---
+
+## Supported Debrid Services
+
+- [RealDebrid](https://real-debrid.com/apitoken)
+- [DebridLink](https://debrid-link.fr/webapp/apikey)
+- [AllDebrid](https://alldebrid.com/apikeys)
+- [Premiumize](https://www.premiumize.me/account)
+- [TorBox](https://torbox.app/settings)
+
+---
+
+## Setup
+
+### Requirements
+
+- A Debrid account with an API key
+- A self-hosted [MediaFlow proxy](https://github.com/mhdzumair/mediaflow-proxy) (optional but recommended)
+- Node.js 18+, pnpm 9+
+
+### Running locally
+
+```bash
+pnpm install
+cp .env.example .env   # edit as needed
+pnpm start
+```
+
+Then visit `http://localhost:55771/configure` to generate your manifest URL.
+
+### Environment variables
+
+| Variable | Description |
+|---|---|
+| `ADDON_URL` | Public URL of this addon (e.g. `https://yourdomain.com`) |
+| `PORT` | Port to listen on (default: `55771`) |
+| `SWAGGER_USER` | Username for the swagger-stats dashboard |
+| `SWAGGER_PASSWORD` | Password for the swagger-stats dashboard |
+
+---
+
+## Configuration
+
+Visit `/configure` on your deployed instance. Fill in your Debrid provider and API key, optionally add your MediaFlow proxy URL and password, then copy the generated manifest URL and paste it into Stremio under **Settings → Addons → Add addon** or at [web.stremio.com/#/addons](https://web.stremio.com/#/addons).
+
+### Show Catalog
+
+Enabling **Show catalog** makes your Debrid library browseable from Stremio's **Discover** tab. Without it the addon only provides stream links when you open a title Stremio already knows about.
+
+---
 
 ## FAQs
-Q1. Why DebridSearch is not showing any streaming links on the movie/series page?
-> * DebridSearch only shows streaming links for the downloads and torrents present in your Debrid account. It does NOT search Debrid services for content not already present in your Debrid account.
-> * The stream links on Stremio are based on Addon installation order. If DebridSearch is at end of the installed addons, any streams shown by DebridSearch would also be at the end of the streams list.
 
-Q2. How to add content to Debrid account for DebridSearch to show them as streaming links?
-> * You can find and manually add the torrent/link into your Debrid account and if it matches the movie/series IMDB name, DebridSearch would show it as a stream.
-> * You can also use [Debrid Media Manager](https://debridmediamanager.com) on supported Debrid services
->
+**Why are there no stream links for a movie/series?**
+The addon only shows links for content already in your Debrid account. Use [Debrid Media Manager](https://debridmediamanager.com) to find and cache torrents first, then they will appear here.
 
-Q3. Getting the error "The add-on providing this item has been removed" when trying to play content from the discover page?
-> * Items in catalog/discover page of DebridSearch need Torrentio catalog option to be enabled to work. Stream links shown in movie/show details page don't need Torrentio
+**Why does stream order matter?**
+Stremio shows streams in addon installation order. Install this addon near the top of your list if you want its results to appear first.
 
-
-
+**Why use a MediaFlow proxy?**
+Without it, Debrid services see your local IP when you stream. With MediaFlow, all traffic routes through your server so Debrid only ever sees one IP — your proxy server's.
