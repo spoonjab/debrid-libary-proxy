@@ -1,7 +1,7 @@
 {
 	"name": "debrid-library-proxy",
 	"version": "1.0.0",
-	"description": "Stremio Addon that streams media from your Debrid library, routed through a MediaFlow proxy so your IP stays private",
+	"description": "Stremio Addon that streams media from your Debrid library, routed through a MediaFlow proxy so your IP stays private. Used in conjunction with debridmediamanager allows you to fill in the gaps for other torrent indexers so you can manually find working streams and have them already loaded via your debrid library.",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
